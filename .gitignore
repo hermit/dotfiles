@@ -1,0 +1,10 @@
+*.BAK
+*.elc
+*.exe
+*.suo
+*.tmp
+*~
+.bash_history
+.newsrc.eld
+.tc-record
+.zcompdump
