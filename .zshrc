@@ -1,4 +1,4 @@
-PS1='%B%#%b '
+PS1='%B%{[36m%}%#%{[m%}%b '
 #RPS1='%B%~%b'
 
 # (cd‚µ‚½‚¾‚¯‚È‚çchpwd‚Å‚¢‚¢‚ªAssh‚ÌI—¹‚É‚àXV‚µ‚½‚¢‚Ì‚Åprecmd)
@@ -9,7 +9,7 @@ alias a=alias d='ls -AlFBG --color=tty --show-control-chars' h=history
 a j='jobs -l' l=less m=make mv='mv -i' pd=popd q=exit t=which
 a cp='cp -ip' rsync='rsync -a' scp='scp -p'
 
-setopt auto_cd auto_pushd correct ignore_eof list_packed
+setopt auto_cd auto_pushd pushd_ignore_dups correct ignore_eof list_packed
 # print_eight_bit
 
 HISTFILE=~/var/zsh_history
@@ -19,5 +19,5 @@ setopt hist_ignore_all_dups hist_ignore_dups hist_no_store hist_reduce_blanks hi
 
 export RUBYLIB=$HOME/src/ruby-progressbar-0.9
 
-autoload -U compinit
-compinit
+autoload -U compinit; compinit
+#autoload predict-on; predict-on
