@@ -1,0 +1,19 @@
+;;; -*-emacs-lisp-*- This file is automatically created
+
+;; $Id$
+
+;;(setq tcode-data-directory "~/tcode/")
+(setq tcode-data-directory "~/.emacs.d/site-lisp/tc-2.3.1-22.5/etc")
+(setq tcode-mazegaki-dictionary-name "~/tcode/mazegaki.dic")
+(setq tcode-default-input-method "japanese-T-Code")
+(add-hook 'tcode-ready-hook '(lambda () (tcode-set-key-layout "dvorak")))
+
+(setq enable-recursive-minibuffers t) ; M-x japanese-katakana-region “™‚ðŽg‚¢‚½‚¢‚½‚ß
+
+(setq tcode-mazegaki-fixed-priority-count 0)
+
+(defadvice save-some-buffers (before hermit-tc-save-dict activate)
+  (if (fboundp 'tcode-save-dictionaries)
+      (tcode-save-dictionaries)))
+
+;;(defadvice view-mode (before hermit-tc-off activate)

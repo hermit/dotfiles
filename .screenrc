@@ -1,0 +1,6 @@
+vbell off
+deflogin off
+escape ^L^L
+bind l other
+bind x paste .
+bind ^x paste .
