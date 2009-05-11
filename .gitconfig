@@ -1,0 +1,8 @@
+[user]
+	email = hermit@koka-in.org
+	name = Akio Kitano
+[color]
+	diff = auto
+[core]
+	editor=C:/meadow/bin/emacsclient
+	pager=lv
