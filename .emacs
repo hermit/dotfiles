@@ -1,5 +1,11 @@
 ;; $Id$
 
+;; GitHub等で一般には公開したくない情報は、
+;; .emacsではなくて~/.emacs.d/private.elに書くことにする。
+(load "~/.emacs.d/private.el")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; 文字コード関連
 
 (set-language-environment 'Japanese)
@@ -8,6 +14,7 @@
 (add-to-list
  'file-coding-system-alist
  '("/Mozilla/Firefox/Profiles/[^/]+/itsalltext/" . utf-8))
+(add-to-list 'file-coding-system-alist '("/Luco/" . utf-8))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -178,8 +185,7 @@
 (global-set-key "\C-xc" 'describe-key-briefly)
 (global-set-key "\C-x\C-o" 'other-window)
 (global-set-key "\C-x\C-q" 'view-mode)
-(global-set-key "\C-c\C-s"
-		(lambda () (interactive) (switch-to-buffer "*scratch*")))
+(global-set-key "\C-xaf" 'auto-fill-mode)
 (global-set-key "\C-cg" 'grep)
 (global-set-key "\C-cw" 'compare-windows)
 
@@ -208,6 +214,23 @@
 
 		("\C-m")))
      (define-key view-mode-map (car p) (cdr p))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; around *scratch*
+
+(define-key global-map "\C-c\C-s"
+  (defun hermit-switch-to-scratch-buffer ()
+    (interactive)
+    (switch-to-buffer "*scratch*")))
+
+(let ((file "~/.emacs.d/scratch.txt"))
+  (when (file-exists-p file)
+    (set-buffer (get-buffer "*scratch*"))
+    (erase-buffer)
+    (insert-file-contents file)
+    (set-buffer-modified-p nil))
+  (setq buffer-file-name file))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -240,6 +263,13 @@
 (setq eshell-glob-include-dot-dot nil)
 
 (iswitchb-mode t)
+
+(add-to-list 'load-path "c:/meadow/packages/lisp")
+(add-to-list 'load-path "c:/meadow/packages/lisp/apel")
+(add-to-list 'load-path "c:/meadow/packages/lisp/emu")
+(add-to-list 'load-path "c:/meadow/packages/lisp/elscreen")
+(add-to-list 'load-path "c:/meadow/packages/lisp/w3m")
+(add-to-list 'load-path "c:/meadow/packages/lisp/ruby")
 
 (require 'session)
 
@@ -309,8 +339,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(elscreen-tab-width 12)
- '(user-mail-address "hermit@koka-in.org"))
+ '(elscreen-tab-width 12))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
